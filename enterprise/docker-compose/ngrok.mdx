@@ -1,0 +1,53 @@
+---
+title: Serve with ngrok
+sidebarTitle: ngrok
+description: Give the Docker Compose stack a public HTTPS URL with ngrok
+icon: globe
+---
+
+ngrok gives the [Docker Compose](/enterprise/docker-compose) stack a public HTTPS URL. This works on
+a laptop or a server, and you do not need to open any ports.
+
+## Prerequisites
+
+- The [Docker Compose prerequisites](/enterprise/docker-compose#prerequisites)
+- An ngrok account
+- An ngrok domain, such as `openhands-example.ngrok.app`. You can find or create one on the
+  [Domains](https://dashboard.ngrok.com/domains) page of the ngrok dashboard.
+- Your ngrok authtoken from the [Your Authtoken](https://dashboard.ngrok.com/get-started/your-authtoken) page
+
+## Install
+
+<Steps>
+  <Step title="Clone the repository">
+    ```bash
+    git clone https://github.com/OpenHands/enterprise.git
+    cd enterprise
+    ```
+  </Step>
+  <Step title="Configure the stack">
+    Create a `.env` file in the `enterprise` directory. Replace the domain and the authtoken with
+    your own:
+
+    ```bash .env
+    COMPOSE_FILE=docker-compose.yml:docker-compose.ngrok.yml
+    NGROK_AUTHTOKEN=your-ngrok-authtoken
+    WEB_HOST=openhands-example.ngrok.app
+    WEB_URL=https://openhands-example.ngrok.app
+    AGENT_CANVAS_LOCK_TO_CLOUD=https://openhands-example.ngrok.app
+    ```
+
+    `COMPOSE_FILE` adds an ngrok service to the stack. Docker Compose reads this file on every
+    command, so the commands on the [Docker Compose](/enterprise/docker-compose) page work without
+    changes.
+  </Step>
+  <Step title="Start the stack">
+    ```bash
+    docker compose up --wait
+    ```
+  </Step>
+  <Step title="Complete onboarding">
+    Open your ngrok URL and follow the onboarding flow to create your first user and configure
+    your LLM provider.
+  </Step>
+</Steps>

@@ -553,7 +553,15 @@
           {
             "group": "Deployment",
             "pages": [
-              "enterprise/docker-compose",
+              {
+                "group": "Docker Compose",
+                "icon": "docker",
+                "root": "enterprise/docker-compose",
+                "pages": [
+                  "enterprise/docker-compose/ngrok",
+                  "enterprise/docker-compose/https"
+                ]
+              },
               {
                 "group": "Kubernetes",
                 "icon": "dharmachakra",
