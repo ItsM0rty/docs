@@ -33,32 +33,11 @@ OpenHands Enterprise with a small group of users. For production, we recommend
   </Step>
 </Steps>
 
-## Configuration
+## Share with your team
 
-Set these variables in your shell or in a `.env` file in the `enterprise` directory:
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `APP_PORT` | `3100` | The port that OpenHands is served on. |
-| `WEB_HOST` | `localhost` | The hostname that users enter in their browser. |
-| `WEB_URL` | `http://localhost:3100` | The full URL that users enter in their browser. |
-| `AGENT_CANVAS_LOCK_TO_CLOUD` | `http://localhost:3100` | The URL that Agent Canvas connects to. Set it to the same value as `WEB_URL`. |
-| `DB_USER`, `DB_PASS`, `DB_NAME` | `openhands` | The PostgreSQL credentials and database name. |
-
-To reach OpenHands from another machine, set `WEB_HOST`, `WEB_URL`, and
-`AGENT_CANVAS_LOCK_TO_CLOUD` to match the address in the browser exactly. For example:
-
-```bash .env
-WEB_HOST=openhands.example.com
-WEB_URL=https://openhands.example.com
-AGENT_CANVAS_LOCK_TO_CLOUD=https://openhands.example.com
-```
-
-To serve the stack over HTTPS, see [Serve with ngrok](/enterprise/docker-compose/ngrok) or
-[Run on a VM with HTTPS](/enterprise/docker-compose/https).
-
-Set the database credentials before the first start. PostgreSQL keeps the credentials it was
-created with, so changing them later requires a [reset](#reset).
+By default, the stack is only reachable from the machine it runs on. To share it with others,
+serve it over HTTPS with [ngrok](/enterprise/docker-compose/ngrok) or run it on a
+[VM with your own domain](/enterprise/docker-compose/https).
 
 ## Upgrade
 
