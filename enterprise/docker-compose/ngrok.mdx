@@ -5,16 +5,17 @@ description: Give the Docker Compose stack a public HTTPS URL with ngrok
 icon: globe
 ---
 
-ngrok gives the [Docker Compose](/enterprise/docker-compose) stack a public HTTPS URL. This works on
-a laptop or a server, and you do not need to open any ports.
+ngrok gives the [Docker Compose](/enterprise/docker-compose) stack a public HTTPS URL. You do not
+need to open any ports.
 
 ## Prerequisites
 
 - The [Docker Compose prerequisites](/enterprise/docker-compose#prerequisites)
-- An ngrok account
-- An ngrok domain, such as `openhands-example.ngrok.app`. You can find or create one on the
-  [Domains](https://dashboard.ngrok.com/domains) page of the ngrok dashboard.
-- Your ngrok authtoken from the [Your Authtoken](https://dashboard.ngrok.com/get-started/your-authtoken) page
+- ngrok, installed and connected to your ngrok account. Follow steps 1 and 2 of the
+  [ngrok Agent CLI Quickstart](https://ngrok.com/docs/gateway/endpoints/agent-cli-quickstart).
+- Your ngrok domain. Every ngrok account includes a free dev domain, such as
+  `example-name.ngrok-free.app`. You can find it on the [Domains](https://dashboard.ngrok.com/domains)
+  page of the ngrok dashboard.
 
 ## Install
 
@@ -26,28 +27,30 @@ a laptop or a server, and you do not need to open any ports.
     ```
   </Step>
   <Step title="Configure the stack">
-    Create a `.env` file in the `enterprise` directory. Replace the domain and the authtoken with
-    your own:
+    Create a `.env` file in the `enterprise` directory. Replace `example-name.ngrok-free.app` with
+    your ngrok domain:
 
     ```bash .env
-    COMPOSE_FILE=docker-compose.yml:docker-compose.ngrok.yml
-    NGROK_AUTHTOKEN=your-ngrok-authtoken
-    WEB_HOST=openhands-example.ngrok.app
-    WEB_URL=https://openhands-example.ngrok.app
-    AGENT_CANVAS_LOCK_TO_CLOUD=https://openhands-example.ngrok.app
+    WEB_HOST=example-name.ngrok-free.app
+    WEB_URL=https://example-name.ngrok-free.app
+    AGENT_CANVAS_LOCK_TO_CLOUD=https://example-name.ngrok-free.app
     ```
-
-    `COMPOSE_FILE` adds an ngrok service to the stack. Docker Compose reads this file on every
-    command, so the commands on the [Docker Compose](/enterprise/docker-compose) page work without
-    changes.
   </Step>
   <Step title="Start the stack">
     ```bash
     docker compose up --wait
     ```
   </Step>
+  <Step title="Start ngrok">
+    ```bash
+    ngrok http 3100 --url https://example-name.ngrok-free.app
+    ```
+
+    ngrok serves the stack at your domain while this command runs. Keep it running.
+  </Step>
   <Step title="Complete onboarding">
     Open your ngrok URL and follow the onboarding flow to create your first user and configure
-    your LLM provider.
+    your LLM provider. On a free ngrok account, ngrok shows a warning page first. Click **Visit**
+    to continue.
   </Step>
 </Steps>
